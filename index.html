@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Portfolio Matyáše Přibyla: aplikace a automatizace postavené s Claude Code pro skutečné zákazníky – tiskárnu, detailing aut, šperkařskou značku a stavební firmy.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Portfolio Matyáše Přibyla">
+<meta property="og:description" content="Portfolio Matyáše Přibyla: aplikace a automatizace postavené s Claude Code pro skutečné zákazníky – tiskárnu, detailing aut, šperkařskou značku a stavební firmy.">
+<meta property="og:url" content="https://matyasek.github.io/">
+<meta property="og:image" content="https://matyasek.github.io/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<title>Portfolio Matyáše Přibyla</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700;800&family=Onest:wght@400;500;600;700&display=swap">
+
+<style>
+  /* ---------- tokeny: stránka je vždy tmavá, bez ohledu na nastavení čtenáře ---------- */
+  :root{
+    color-scheme:dark;
+    --p:#0F1114;
+    --t:#F1F1EE;
+    --s:#9AA0A8;
+    --r:#262A31;
+    --o:#FF6A2A;
+    --o-text:#FF8A55;
+    --o-tint:#1E1712;
+    --na-o:#0E1013;
+    --pata:#17191D;
+    --pata-t:#F1F1EE;
+    --pata-s:#9AA0A8;
+    --font:"Onest",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    --font-nadpis:"Unbounded","Onest",-apple-system,"Segoe UI",sans-serif;
+  }
+
+  /* ---------- základ ---------- */
+  *{box-sizing:border-box}
+  body{
+    margin:0;background:var(--p);color:var(--t);font-family:var(--font);
+    font-size:16.5px;line-height:1.58;-webkit-font-smoothing:antialiased
+  }
+  .vnitr{max-width:1120px;margin:0 auto;padding-inline:clamp(16px,5vw,56px)}
+  p{margin:0 0 14px;text-wrap:pretty}
+  a{color:inherit;text-decoration:underline;text-decoration-color:var(--o);text-decoration-thickness:2px;text-underline-offset:4px}
+  a:hover{color:var(--o-text)}
+  a:focus-visible{outline:2px solid var(--o);outline-offset:3px}
+  .roztazene{font-family:var(--font-nadpis);font-weight:800;letter-spacing:-.03em}
+
+  /* čtverec stavu: oranžový běží, plný je rozjetá zakázka, prázdný je předaný */
+  .ctverec{display:inline-block;width:10px;height:10px;border:2px solid var(--t);vertical-align:0;margin-right:9px;flex:none}
+  .bezi .ctverec{background:var(--o);border-color:var(--o)}
+  .prubezne .ctverec{background:var(--t)}
+
+  .stitek{
+    display:flex;align-items:center;gap:10px;margin:0 0 12px;
+    font-weight:700;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase
+  }
+  .stitek::before{content:"";width:10px;height:10px;background:var(--o);flex:none}
+
+  /* ---------- hlavička ---------- */
+  .hlavicka{padding-block:52px 34px}
+  .hlavicka .mrizka{padding-bottom:30px;border-bottom:2px solid var(--t)}
+  .eyebrow{font-size:13px;color:var(--s);margin:0 0 16px}
+  h1{font-size:clamp(44px,7.4vw,80px);line-height:.94;margin:0 0 20px}
+  .kurz-radek{margin:0 0 16px;font-size:14px}
+  .teze{font-size:clamp(17.5px,2vw,20px);line-height:1.5;margin:0 0 18px;max-width:36em}
+  .kontakt{display:flex;flex-wrap:wrap;gap:8px 24px;font-size:14.5px;color:var(--s);margin:0}
+
+
+  /* ---------- sekce ---------- */
+  .sekce{padding-block:34px 20px}
+  h2{font-size:clamp(30px,4.2vw,44px);line-height:1.02;margin:0 0 14px}
+  .uvod{font-size:17.5px;max-width:40em;margin:0 0 28px}
+
+  /* přehled */
+  .tab-obal{overflow-x:auto;margin-bottom:12px}
+  table{width:100%;border-collapse:collapse;font-size:15.5px;color:var(--t);font-family:inherit}
+  th{text-align:left;font-weight:600;font-size:12.5px;color:var(--s);padding:0 14px 10px 0;border-bottom:1px solid var(--t)}
+  td{padding:13px 14px 13px 0;border-bottom:1px solid var(--r);vertical-align:baseline}
+  td:first-child{font-weight:600}
+  td:first-child a{text-decoration-thickness:1px;text-decoration-color:var(--r)}
+  td:first-child a:hover{text-decoration-color:var(--o)}
+  tbody tr:hover{background:var(--o-tint)}
+  td.stav{white-space:nowrap}
+  td.predano{color:var(--s)}
+
+  /* projekt */
+  .projekt{
+    display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:0 52px;
+    padding-block:44px 52px;border-top:4px solid var(--o);scroll-margin-top:12px
+  }
+  .projekt:first-of-type{margin-top:40px}
+  .p-hlava{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 20px;margin-bottom:26px}
+  h3{font-size:clamp(22px,2.8vw,30px);line-height:1.08;margin:0}
+  .projekt h3{flex-basis:100%;font-size:clamp(30px,4.6vw,54px);line-height:1;letter-spacing:-.035em;margin-bottom:6px}
+  .p-stav{margin:0;font-size:14px;font-weight:600;display:flex;align-items:center}
+  .predano.p-stav{color:var(--s)}
+  .pro{margin:0;font-size:14px;color:var(--s)}
+  .p-text{grid-column:1;min-width:0}
+  .co{font-size:18px;line-height:1.52;margin:0 0 20px}
+  .proc{max-width:62ch}
+  .proc b{font-weight:700}
+  .p-bok{grid-column:2;min-width:0;align-self:start;position:sticky;top:20px}
+  .p-bok img{display:block;width:100%;height:auto;max-width:100%;border:1px solid var(--r);margin-bottom:20px}
+  .stack{font-size:13.5px;line-height:1.6;color:var(--s);margin:0 0 14px;padding-top:14px;border-top:1px solid var(--r)}
+  .odkazy{display:flex;flex-direction:column;gap:6px;font-size:14.5px;margin:0}
+  .odkazy .privat{color:var(--s)}
+
+  /* postup: skutečné pořadí kroků */
+  .postup{list-style:none;padding:0;margin:4px 0 22px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;counter-reset:k}
+  .postup li{counter-increment:k;font-size:14px;line-height:1.35;border-top:2px solid var(--t);padding-top:10px}
+  .postup li::before{
+    content:counter(k);display:grid;place-items:center;width:24px;height:24px;margin-bottom:8px;
+    background:var(--t);color:var(--p);font-weight:700;font-size:12.5px
+  }
+  .postup b{display:block;font-weight:700;font-size:14.5px}
+  .postup span{color:var(--s)}
+
+  /* ---------- oranžový pás: jak pracuju ---------- */
+  .pas{background:var(--o);color:var(--na-o);padding-block:60px 64px;margin-top:40px}
+  .pas a{text-decoration-color:var(--na-o)}
+  .pas a:hover{color:var(--na-o)}
+  .pas .uvod{font-size:18.5px;max-width:44em}
+  .blok{padding-block:30px 6px;border-top:2px solid var(--na-o)}
+  .blok h3{font-size:clamp(19px,2.2vw,24px);margin:0 0 12px}
+  .blok>p{max-width:64ch}
+  .zvyrazneni{border-left:3px solid var(--na-o);padding-left:14px}
+  .zvyrazneni b{font-weight:700}
+  .pact{list-style:none;padding:0;margin:8px 0 22px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+  .pact li{display:grid;grid-template-columns:54px minmax(0,1fr);gap:12px;align-items:start;font-size:14.5px;line-height:1.4}
+  .pact b{display:grid;place-items:center;width:54px;height:54px;background:var(--na-o);color:var(--o);font-family:var(--font-nadpis);font-weight:800;font-size:24px}
+  .pact strong{display:block;font-weight:700;font-size:15.5px}
+  .pas .postup{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .pas .postup li{border-top-color:var(--na-o)}
+  .pas .postup li::before{background:var(--na-o);color:var(--o)}
+  .pas .postup span{color:var(--na-o);opacity:.75}
+  .pojistky{list-style:none;padding:0;margin:8px 0 24px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 36px}
+  .pojistky li{display:grid;grid-template-columns:14px minmax(0,1fr);gap:12px;font-size:15px;line-height:1.45}
+  .pojistky li::before{content:"";width:12px;height:12px;background:var(--na-o);margin-top:5px}
+  .pojistky b{display:block;font-weight:700;font-size:16px}
+
+  /* ---------- kurzy ---------- */
+  .kurz{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:20px 52px;padding-block:30px;border-top:2px solid var(--t)}
+  .kurz:first-of-type{margin-top:10px}
+  .kurz h3{font-size:clamp(19px,2.2vw,24px);margin:0 0 8px}
+  .kurz .p-stav{margin:0 0 12px}
+  .kurz img{display:block;width:100%;height:auto;max-width:100%;border:1px solid var(--r)}
+  .kurz img.odznak{max-width:340px;border:0}
+
+  /* ---------- pata ---------- */
+  .pata{background:var(--pata);color:var(--pata-t);padding-block:54px 58px;margin-top:44px}
+  .pata .mrizka{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:24px 52px}
+  .pata h2{color:var(--pata-t)}
+  .pata p{color:var(--pata-t);max-width:58ch}
+  .pata strong{font-weight:700}
+  .pata .kontakty{display:flex;flex-direction:column;gap:10px;font-size:17px;align-self:end}
+  .pata .kontakty a{color:var(--pata-t)}
+  .pata .kontakty span{color:var(--pata-s);font-size:14px}
+
+  /* ---------- úzké obrazovky ---------- */
+  @media (max-width:820px){
+    .projekt,.kurz,.pata .mrizka{grid-template-columns:minmax(0,1fr)}
+    .p-text,.p-bok{grid-column:1}
+    .p-bok{position:static;margin-top:10px}
+    .skryt{display:none}
+    .pact,.pojistky{grid-template-columns:minmax(0,1fr)}
+    .pas .postup{grid-template-columns:repeat(3,minmax(0,1fr))}
+  }
+  @media (max-width:520px){
+    .postup{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .pas .postup{grid-template-columns:repeat(2,minmax(0,1fr))}
+  }
+</style>
+</head>
+<body>
+<header class="hlavicka">
+  <div class="vnitr">
+    <div class="mrizka">
+      <div>
+        <p class="eyebrow">Portfolio · září 2026 · Praha</p>
+        <h1 class="roztazene">Matyáš<br>Přibyl</h1>
+        <p class="kurz-radek"><a href="#kurzy">Absolvent Superpower Vibe Coding Summer (Aibility)</a></p>
+        <p class="teze">S&nbsp;Claude Code stavím aplikace a&nbsp;automatizace pro skutečné zákazníky: tiskárnu, detailing aut, šperkařskou značku i&nbsp;stavební firmy. Ne dema na jedno předvedení, ale věci, které běží, i&nbsp;když u&nbsp;nich nesedím. Stojí na systému, který jsem si kolem Claude Code postavil: jeden pracovní prostor, pevný postup pro každý projekt a&nbsp;pojistky, které hlídají bezpečnost i&nbsp;kvalitu.</p>
+        <p class="kontakt"><a href="mailto:matyaspribyll@seznam.cz">matyaspribyll@seznam.cz</a><a href="https://github.com/Matyasek">github.com/Matyasek</a></p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="sekce" id="projekty">
+    <div class="vnitr">
+      <h2 class="roztazene">Projekty</h2>
+      <p class="uvod">Projektů mám víc, tohle je osm nejzajímavějších. Postup, který za nimi stojí, je popsaný níž v&nbsp;části <a href="#metoda">Jak pracuju</a>.</p>
+
+      <p class="stitek">Přehled</p>
+      <div class="tab-obal">
+        <table>
+          <thead><tr><th>Projekt</th><th class="skryt">Pro koho</th><th>Stav</th></tr></thead>
+          <tbody>
+            <tr><td><a href="#agent">Obsahový agent pro tiskárnu</a></td><td class="skryt">rodinná tiskárna, Praha</td><td class="stav bezi"><i class="ctverec"></i>Běží naostro</td></tr>
+            <tr><td><a href="#tuk">Ťuk</a></td><td class="skryt">domácnost</td><td class="stav bezi"><i class="ctverec"></i>Používáme doma</td></tr>
+            <tr><td><a href="#obsah">Obsah pro dvě značky</a></td><td class="skryt">tiskárna, detailing aut</td><td class="stav prubezne"><i class="ctverec"></i>Spouští se</td></tr>
+            <tr><td><a href="#dilna">Dílna 3D v&nbsp;Blenderu</a></td><td class="skryt">šperky, reklamní předměty</td><td class="stav prubezne"><i class="ctverec"></i>Zakázky</td></tr>
+            <tr><td><a href="#atrostars">atrostars.com</a></td><td class="skryt">značka stříbrných šperků</td><td class="stav bezi"><i class="ctverec"></i>Běží</td></tr>
+            <tr><td><a href="#harmonogramy">Harmonogramy staveb</a></td><td class="skryt">stavební firmy</td><td class="stav predano"><i class="ctverec"></i>Předáno</td></tr>
+            <tr><td><a href="#hermes">Hermes Agent</a></td><td class="skryt">pro mě</td><td class="stav bezi"><i class="ctverec"></i>Běží přes Telegram</td></tr>
+            <tr><td><a href="#svacina">SVAČINA</a></td><td class="skryt">soutěž firmy profiq</td><td class="stav predano"><i class="ctverec"></i>Odevzdáno</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <article class="projekt" id="agent">
+        <header class="p-hlava">
+          <h3 class="roztazene">Obsahový agent pro tiskárnu</h3>
+          <p class="p-stav bezi"><i class="ctverec"></i>Běží naostro</p>
+          <p class="pro">pražská rodinná tiskárna a&nbsp;grafické studio</p>
+        </header>
+        <div class="p-text">
+          <p class="co">Automatizace příspěvků na sociální sítě, která nepřetržitě běží na Railway. Každou neděli ráno najde náměty, napíše z&nbsp;nich návrhy postů a&nbsp;uloží je do Notionu. Tam je čte a&nbsp;schvaluje člověk. Nic se nepublikuje samo.</p>
+          <ol class="postup">
+            <li><b>Neděle 7:00</b><span>hledá náměty</span></li>
+            <li><b>8:00</b><span>píše návrhy postů</span></li>
+            <li><b>Dvě kontroly</b><span>fakta a&nbsp;čeština</span></li>
+            <li><b>Notion</b><span>schválí člověk</span></li>
+          </ol>
+          <p class="proc">Každé číslo v&nbsp;návrhu musí mít zdroj v&nbsp;<b>bance ověřených faktů</b> o&nbsp;firmě. Návrh s&nbsp;číslem bez zdroje agent jednou přepíše, a&nbsp;pokud ani pak neprojde, pošle ho do Notionu označený k&nbsp;ověření. Když se v&nbsp;návrhu jednou objevila smyšlená kolegyně, dohledal jsem příčinu ve vzorovém textu, ze kterého ji model opsal, a&nbsp;opravil pravidla, ne jen jeden post.</p>
+          <p class="proc">Agent je postavený pro víc značek. Druhou je detailing z&nbsp;projektu <a href="#obsah">Obsah pro dvě značky</a>.</p>
+        </div>
+        <aside class="p-bok">
+          <p class="stack">TypeScript · Node 22 · Hono · Vercel AI SDK (Gemini, Groq) · Notion API · Apify · Railway · 593&nbsp;automatických testů</p>
+          <p class="odkazy"><span class="privat">repozitář soukromý, přístup na požádání</span></p>
+        </aside>
+      </article>
+
+      <article class="projekt" id="tuk">
+        <header class="p-hlava">
+          <h3 class="roztazene">Ťuk</h3>
+          <p class="p-stav bezi"><i class="ctverec"></i>Běží, používáme doma</p>
+          <p class="pro">vlastní aplikace pro domácnost</p>
+        </header>
+        <div class="p-text">
+          <p class="co">Domácí deník, do kterého se zapisuje přiložením telefonu. U&nbsp;dveří, u&nbsp;květin a&nbsp;u&nbsp;koše jsou NFC nálepky. Stačí k&nbsp;nim přiložit iPhone a&nbsp;do deníku se zapíše, že je zamčeno, zalito nebo vyneseno, bez otevírání aplikace. Když se na něco zapomene, přijde připomínka.</p>
+          <ol class="postup">
+            <li><b>Nálepka</b><span>u&nbsp;dveří, u&nbsp;květin, u&nbsp;koše</span></li>
+            <li><b>Zkratka v&nbsp;iPhonu</b><span>spustí se přiložením</span></li>
+            <li><b>Server</b><span>ověří a&nbsp;zapíše</span></li>
+            <li><b>Deník</b><span>sdílený v&nbsp;domácnosti</span></li>
+          </ol>
+          <p class="proc">Nápad vznikl doma. Pořád jsme se vraceli ke dveřím zkontrolovat, jestli jsou zamčené, a&nbsp;nevěděli, kdo naposledy zalil kytky. Teď stačí otevřít deník.</p>
+          <p class="proc">Z&nbsp;deníku je zároveň vidět, kdo byl kdy doma a&nbsp;kdy je byt prázdný. Právě proto jsem bezpečnost řešil jako první: <b>33 sepsaných rizik</b>, každé s&nbsp;opatřením, a&nbsp;automatický test, který ověřuje, že se jedna domácnost nedostane k&nbsp;datům druhé.</p>
+        </div>
+        <aside class="p-bok">
+          <p class="stack">Supabase · Postgres 17 · Edge Functions v&nbsp;Denu · pg_cron · Web Push · PWA ve Vite a&nbsp;TypeScriptu · Docker na Railway · 91&nbsp;automatických testů</p>
+          <p class="odkazy"><a href="https://okno-production-162d.up.railway.app">Otevřít aplikaci</a><span class="privat">vyžaduje účet · repozitář soukromý, přístup na požádání</span></p>
+        </aside>
+      </article>
+
+      <article class="projekt" id="obsah">
+        <header class="p-hlava">
+          <h3 class="roztazene">Obsah pro dvě značky</h3>
+          <p class="p-stav prubezne"><i class="ctverec"></i>Právě se spouští</p>
+          <p class="pro">tiskárna a&nbsp;mobilní detailing aut</p>
+        </header>
+        <div class="p-text">
+          <p class="co">Příspěvky a&nbsp;videa na sociální sítě. Podklady připravuji od začátku srpna a&nbsp;první příspěvky teď jdou na sítě. Nedělám jednotlivé posty, ale systém, který je vyrábí: šablony, ověřená fakta, hlas značky a&nbsp;kontrolu před vydáním.</p>
+          <p class="proc">Navazuje na <a href="#agent">obsahového agenta</a>. Agent chystá návrhy textů pro tiskárnu. Hotové posty s&nbsp;grafikou a&nbsp;videa pro obě značky vznikají tady, z&nbsp;hlasu značky a&nbsp;ověřených faktů.</p>
+          <p class="proc">Plán obsahu tiskárny vychází z&nbsp;<b>rozboru 300 jejích příspěvků z&nbsp;let 2018 až 2026</b>. Posty postavené na fotce fungovaly líp než čistě grafické, takže nový plán staví víc na fotkách.</p>
+          <p class="proc">Videa stříhá Claude Code: dávky svislých videí přes vlastní skript, grafická videa v&nbsp;HyperFrames a&nbsp;úpravy na časové ose v&nbsp;DaVinci Resolve, který ovládá přes MCP. Já výsledek jen schvaluji.</p>
+        </div>
+        <aside class="p-bok">
+          <p class="stack">HTML šablony · HyperFrames a&nbsp;Remotion · DaVinci Resolve přes MCP · Apify a&nbsp;Python na rozbor</p>
+          <p class="odkazy"><span class="privat">ukázky na požádání</span></p>
+        </aside>
+      </article>
+
+      <article class="projekt" id="dilna">
+        <header class="p-hlava">
+          <h3 class="roztazene">Dílna 3D v&nbsp;Blenderu</h3>
+          <p class="p-stav prubezne"><i class="ctverec"></i>Zakázky</p>
+          <p class="pro">šperky k&nbsp;odlití, reklamní předměty, animace</p>
+        </header>
+        <div class="p-text">
+          <p class="co">Blender ovládaný z&nbsp;Claude Code přes MCP. Vznikají v&nbsp;něm prsteny a&nbsp;přívěsky k&nbsp;odlití do stříbra, reklamní předměty k&nbsp;3D tisku a&nbsp;animace na sítě. Z&nbsp;každého modelu vznikne soubor pro zlatníka nebo tiskárnu a&nbsp;rendery pro klienta.</p>
+          <p class="proc">Každý model před odevzdáním projde <b>měřením, ne jen pohledem</b>: tloušťky, rozměry i&nbsp;hmotnost, ze které se počítá cena stříbra. Chyby se tak najdou na obrazovce, ne až ve výrobě.</p>
+          <p class="proc">Prsten je parametrický skript. Jiná velikost je změna jednoho čísla, ne hodina modelování.</p>
+        </div>
+        <aside class="p-bok">
+          <p class="stack">Blender přes MCP · parametrické skripty v&nbsp;Pythonu · STL pro odlití i&nbsp;3D tisk · rendery a&nbsp;360° točna</p>
+          <p class="odkazy"><span class="privat">modely a&nbsp;rendery na požádání</span></p>
+        </aside>
+      </article>
+
+      <article class="projekt" id="atrostars">
+        <header class="p-hlava">
+          <h3 class="roztazene">atrostars.com</h3>
+          <p class="p-stav bezi"><i class="ctverec"></i>Běží · zakázka</p>
+          <p class="pro">portfolio značky ručně dělaných stříbrných šperků</p>
+        </header>
+        <div class="p-text">
+          <p class="co">Portfoliový web šperkařské značky a&nbsp;jeden z&nbsp;mých prvních projektů. Galerie kusů, poptávkový formulář a&nbsp;redakce, ve které se galerie upravuje bez znalosti kódu.</p>
+          <p class="proc"><b>Vlastní přihlášení do redakce</b> přes GitHub jsem postavil s&nbsp;Claude Code. Redakce se při nečinnosti sama odhlásí, formulář odfiltruje roboty a&nbsp;zásady ochrany údajů prošly revizí právníka.</p>
+        </div>
+        <aside class="p-bok">
+          <img src="obrazky/atrostars.jpg" width="1200" height="800" alt="Úvodní stránka atrostars.com se stříbrným prstenem">
+          <p class="stack">Statické HTML, CSS a&nbsp;JavaScript · Decap CMS · Vercel · three.js · bezpečnostní hlavičky</p>
+          <p class="odkazy"><a href="https://atrostars.com">atrostars.com</a></p>
+        </aside>
+      </article>
+
+      <article class="projekt" id="harmonogramy">
+        <header class="p-hlava">
+          <h3 class="roztazene">Harmonogramy staveb</h3>
+          <p class="p-stav predano"><i class="ctverec"></i>Předáno · placená zakázka</p>
+          <p class="pro">stavební firmy</p>
+        </header>
+        <div class="p-text">
+          <p class="co">Harmonogramy výstavby a&nbsp;cenové analýzy. Zákazník dostane excelový sešit a&nbsp;PDF k&nbsp;tisku s&nbsp;termíny všech činností. Cenové analýzy řeší, za kolik se byty v&nbsp;dané lokalitě prodají, kolik bude stát stavba a&nbsp;jaký vyjde hrubý zisk.</p>
+          <ol class="postup">
+            <li><b>Činnosti</b><span>a&nbsp;jejich návaznosti</span></li>
+            <li><b>Python</b><span>sestaví sešit se vzorci</span></li>
+            <li><b>Kontrola</b><span>termíny spočítá znovu</span></li>
+            <li><b>Excel a&nbsp;PDF</b><span>pro zákazníka</span></li>
+          </ol>
+          <p class="proc">Sešit nevzniká ručně. Claude Code ze zadání zákazníka sepíše činnosti a&nbsp;jejich návaznosti a&nbsp;skript z&nbsp;nich postaví sešit se vzorci. <b>Termíny ze vzorců nezávisle spočítá i&nbsp;Python</b> a&nbsp;obě verze porovná. Celé to od dat po hotové PDF spouští jeden hlavní skript.</p>
+          <p class="proc">Celý postup jsem sepsal jako <b>master prompt</b>, skill pro Claude Code. Vede zakázku od e-mailu zákazníka přes podklady a předpoklady až po harmonogram, cenovou analýzu, průvodku a balík k odeslání. Další stavba je tak hlavně nová data, ne nová práce.</p>
+        </div>
+        <aside class="p-bok">
+          <p class="stack">Python · openpyxl · LibreOffice · kontrola vzorců proti vlastnímu výpočtu · PDF · skill harmonogram-stavby</p>
+          <p class="odkazy"><span class="privat">ukázky na požádání, obsahují data zákazníků</span></p>
+        </aside>
+      </article>
+
+      <article class="projekt" id="hermes">
+        <header class="p-hlava">
+          <h3 class="roztazene">Hermes Agent</h3>
+          <p class="p-stav bezi"><i class="ctverec"></i>Běží přes Telegram</p>
+          <p class="pro">asistent pro chvíle, kdy nejsem u&nbsp;počítače</p>
+        </header>
+        <div class="p-text">
+          <p class="co">Z&nbsp;mobilu mu přes Telegram pošlu odkaz nebo téma. U&nbsp;přeposlaného příspěvku ze sociálních sítí vyhodnotí, jestli se hodí do mé práce, a&nbsp;zapíše verdikt i&nbsp;další krok. Delší rešerše a&nbsp;procházení webů a&nbsp;sociálních sítí nechávám podle potřeby běžet přes noc.</p>
+          <ol class="postup">
+            <li><b>Odkaz z&nbsp;mobilu</b><span>přes Telegram</span></li>
+            <li><b>Hermes</b><span>vyhodnotí nebo prozkoumá</span></li>
+            <li><b>Claude Code</b><span>ráno výstup zkontroluje</span></li>
+            <li><b>Pracovní prostor</b><span>jen to, co prošlo</span></li>
+          </ol>
+          <p class="proc">Hermes běží na jiném jazykovém modelu než Claude. Jeho výstupy každé ráno kontroluje Claude Code a&nbsp;do pracovního prostoru pustí jen to, co projde. <b>Autor a&nbsp;kontrolor jsou tu doopravdy dva různé modely.</b></p>
+          <p class="proc">Agent smí zapisovat jen do vyhrazené složky a&nbsp;text z&nbsp;webu bere jako data, ne jako pokyn. Každý příkaz na počítači musím schválit.</p>
+        </div>
+        <aside class="p-bok">
+          <p class="stack">Hermes Agent · Telegram · GPT-5.6 · Claude Code jako kontrolor · plánované úlohy</p>
+          <p class="odkazy"><span class="privat">běží na mém počítači, ukázky na požádání</span></p>
+        </aside>
+      </article>
+
+      <article class="projekt" id="svacina">
+        <header class="p-hlava">
+          <h3 class="roztazene">SVAČINA</h3>
+          <p class="p-stav predano"><i class="ctverec"></i>Odevzdáno do soutěže</p>
+          <p class="pro">Summer Coding Challenge 2026 od firmy profiq</p>
+        </header>
+        <div class="p-text">
+          <p class="co">V&nbsp;soutěži se neodevzdával kód, ale <b>zadání pro AI agenta</b>. Podle něj měl agent hru postavit sám, v&nbsp;jednom běhu, do hodiny a&nbsp;bez jediného lidského zásahu. Vznikl z&nbsp;něj Snake naruby: hráč je jablko a&nbsp;utíká hadovi po čtverečkovaném sešitě.</p>
+          <ol class="postup">
+            <li><b>Zadání</b><span>do 10&nbsp;000 znaků</span></li>
+            <li><b>25 zkušebních běhů</b><span>17 verzí zadání</span></li>
+            <li><b>Zmrazení</b><span>až po třech dobrých bězích po sobě</span></li>
+            <li><b>Odevzdaný běh</b><span>51 minut, bez úprav</span></li>
+          </ol>
+          <p class="proc">Do výsledku se nedalo ručně sáhnout, takže celá práce byla v&nbsp;tom, jak agentovi úkol zadat. Odevzdaný běh splnil všech 12 kritérií a&nbsp;agent si hru sám ověřil automatickými kontrolami.</p>
+        </div>
+        <aside class="p-bok">
+          <img src="obrazky/svacina.jpg" width="1200" height="800" alt="Úvodní obrazovka hry SVAČINA na čtverečkovaném papíře">
+          <p class="stack">Jeden HTML soubor · canvas · Web Audio · nula závislostí · Claude Code v&nbsp;cloudu</p>
+          <p class="odkazy">
+            <a href="https://matyasek.github.io/svacina-finale/">Zahrát si odevzdanou verzi</a>
+            <a href="https://github.com/Matyasek/svacina-finale/blob/main/prompt.md">Přečíst zadání pro agenta</a>
+            <a href="https://www.pracujprosiliconvalley.cz/summer-coding-challenge-2026/">O&nbsp;soutěži</a>
+          </p>
+        </aside>
+      </article>
+    </div>
+  </section>
+
+  <section class="pas" id="metoda">
+    <div class="vnitr">
+      <h2 class="roztazene">Jak pracuju</h2>
+      <p class="uvod">Claude Code je můj hlavní pracovní nástroj. Běží mi každý den na počítači i&nbsp;v&nbsp;cloudu a&nbsp;je napojený na GitHub, Supabase, Railway, Vercel a&nbsp;Notion. Moje práce je rozhodnout, co se postaví, dobře to zadat a&nbsp;ověřit, že výsledek dělá, co má. Aby to nebyla pokaždé loterie, opírám se o&nbsp;tři věci.</p>
+
+      <div class="blok">
+        <h3 class="roztazene">Pracovní prostor PACT</h3>
+        <p>Jeden repozitář, ve kterém má Claude Code všechno, co potřebuje. Nová session nezačíná od nuly. Claude Code ví, kdo jsem, jak píšu, pro koho pracuju a&nbsp;na čem se zrovna dělá.</p>
+        <ul class="pact">
+          <li><b>P</b><span><strong>Projekty</strong>každý má v&nbsp;registru právě jeden domov</span></li>
+          <li><b>A</b><span><strong>Agenti a&nbsp;skilly</strong>opakovaná práce jako hotový návod</span></li>
+          <li><b>C</b><span><strong>Kontext</strong>já, můj styl, cíle, klienti a&nbsp;jejich značky</span></li>
+          <li><b>T</b><span><strong>Nástroje</strong>skripty a&nbsp;napojení na služby</span></li>
+        </ul>
+        <p>Pořádek hlídá program, ne paměť: kontrola prostoru hlásí zapomenuté větve, projekty mimo registr i&nbsp;nefunkční odkazy.</p>
+        <p class="zvyrazneni"><b>Každou neděli běží revize,</b> která uklízí duplicity a&nbsp;hledá, co z&nbsp;ruční práce povýšit na skill nebo automatizaci.</p>
+      </div>
+
+      <div class="blok">
+        <h3 class="roztazene">Postup pro každý nový projekt</h3>
+        <ol class="postup">
+          <li><b>Idea file</b><span>co a&nbsp;proč</span></li>
+          <li><b>Specifikace</b><span>role a&nbsp;rozsah</span></li>
+          <li><b>Rizika</b><span>threat model</span></li>
+          <li><b>Plán</b><span>po krocích</span></li>
+          <li><b>Stavba</b><span>podle plánu</span></li>
+          <li><b>Testy</b><span>automatické</span></li>
+        </ol>
+        <p>Pořadí je závazné a&nbsp;<b>bez sepsaných rizik se nestaví</b>. Dokumentace žije přímo v&nbsp;repozitáři u&nbsp;kódu: specifikace, rizika, architektura, nasazení od nuly a&nbsp;log rozhodnutí. Projekt tak jde kdykoli předat dál, třeba IT nebo bezpečnostnímu oddělení.</p>
+        <p>Postup jsem sepsal i&nbsp;pro začátečníky tak, aby fungoval v&nbsp;jakémkoli AI nástroji, nejen v&nbsp;Claude Code.</p>
+      </div>
+
+      <div class="blok">
+        <h3 class="roztazene">Pojistky, které běží samy</h3>
+        <p>Část hlídají hooky, část pravidla, která agent dodržuje bez připomínání.</p>
+        <ul class="pojistky">
+          <li><span><b>Začínám nový projekt.</b>Hook připomene závazný postup i&nbsp;seznam dokumentace dřív, než vznikne první řádek kódu.</span></li>
+          <li><span><b>Instaluju skill nebo plugin.</b>Než se nainstaluje, projde bezpečnostním skenerem od NVIDIA. Když skener najde nebezpečný kód, instalaci zastaví.</span></li>
+          <li><span><b>Posílám změny na GitHub.</b>Kontrola před pushem zastaví cokoli, co vypadá jako klíč nebo soubor s&nbsp;hesly, a&nbsp;nepustí změnu, u&nbsp;které padají testy.</span></li>
+          <li><span><b>Něco jde ven z&nbsp;počítače.</b>Výstupní brána: strojová kontrola češtiny, přečtení očima, ověření faktů u&nbsp;zdroje a&nbsp;po poslední úpravě celé znovu. Prošlo jí i&nbsp;tohle portfolio.</span></li>
+          <li><span><b>Kontroluje někdo jiný než autor.</b>Návrh postu ověřuje jiný krok, než který ho napsal. Stejně tak termíny v&nbsp;harmonogramu, 3D model pro zlatníka nebo výstup Hermese.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="sekce" id="kurzy">
+    <div class="vnitr">
+      <h2 class="roztazene">Kurzy</h2>
+
+      <div class="kurz">
+        <div>
+          <h3 class="roztazene">Superpower Vibe Coding Summer</h3>
+          <p class="p-stav predano"><i class="ctverec"></i>Dokončeno · Aibility, certifikát 21.&nbsp;8.&nbsp;2026</p>
+          <p class="proc">Letní program o&nbsp;tom, jak s&nbsp;AI tvořit reporty, weby a&nbsp;aplikace a&nbsp;jak si budovat vlastní druhý mozek. Vychází z&nbsp;něj postup pro nové projekty i&nbsp;část bezpečnostních pojistek popsaných výše.</p>
+        </div>
+        <img src="certifikat-vcs-2026.jpg" width="1600" height="899" alt="Certifikát o absolvování Superpower Vibe Coding Summer pro Matyáše Přibyla, vydala Aibility 21. 8. 2026">
+      </div>
+
+      <div class="kurz">
+        <div>
+          <h3 class="roztazene">Future AI Leader 2026</h3>
+          <p class="p-stav bezi"><i class="ctverec"></i>Začíná 16.&nbsp;10. · Filip Dřímalka</p>
+          <p class="proc">Program o&nbsp;systému práce s&nbsp;AI agenty a&nbsp;zavádění AI ve firmách. Poběží online po pátcích od 16.&nbsp;října do ledna 2027.</p>
+          <p class="odkazy"><a href="https://drimalka.com/future-ai-leader">O&nbsp;programu</a></p>
+        </div>
+        <img class="odznak" src="obrazky/future-ai-leader.webp" width="1080" height="1080" alt="Odznak účastníka: Jsem součástí Future AI Leader, Matyáš Přibyl, start 16. 10. 2026">
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="pata">
+  <div class="vnitr">
+    <h2 class="roztazene">Kam dál</h2>
+    <div class="mrizka">
+      <div>
+        <p>Chci se AI věnovat naplno, ne jen vedle práce ve spedici. Za pár měsíců jsem s&nbsp;Claude Code postavil věci, které běží pro skutečné zákazníky, a&nbsp;všude kolem vidím ruční práci, kterou jde zjednodušit: ceníky, objednávky, dotazy zákazníků. V&nbsp;maloobchodu je jí hodně. Proto se dál vzdělávám a&nbsp;od října začínám program Future AI Leader.</p>
+        <p>Většina repozitářů je soukromá, protože obsahují data klientů. <strong>Přístup dám na požádání hned</strong> a&nbsp;rád projdu kterýkoli projekt, i&nbsp;s&nbsp;místy, kde se něco pokazilo, a&nbsp;tím, jak se to opravovalo.</p>
+      </div>
+      <p class="kontakty">
+        <a href="mailto:matyaspribyll@seznam.cz">matyaspribyll@seznam.cz</a>
+        <a href="https://github.com/Matyasek">github.com/Matyasek</a>
+        <span>Praha</span>
+      </p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
