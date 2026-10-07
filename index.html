@@ -473,5 +473,13 @@
     </div>
   </div>
 </footer>
+
+<script>
+  /* proklik z LinkedInu: ?p=agent otevře rovnou sekci projektu (LinkedIn z odkazu odřízne #, parametr nechá) */
+  (function () {
+    var p = new URLSearchParams(location.search).get("p");
+    if (p && !location.hash && document.getElementById(p)) location.replace("#" + p);
+  })();
+</script>
 </body>
 </html>
