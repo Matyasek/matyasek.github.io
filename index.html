@@ -173,9 +173,12 @@
     .pas .postup{grid-template-columns:repeat(2,minmax(0,1fr))}
   }
   /* ---------- přepínač jazyka ---------- */
-  .jazyk{position:absolute;top:14px;right:clamp(16px,3vw,28px);z-index:10;display:flex;border:2px solid var(--t);background:var(--p)}
+  /* visí v rohu i při rolování, ať ho čtenář najde kdekoli na stránce */
+  .jazyk{position:fixed;top:14px;right:clamp(12px,3vw,28px);z-index:20;display:flex;border:2px solid var(--o);background:var(--p);box-shadow:0 6px 22px rgba(0,0,0,.55)}
   .jazyk[hidden]{display:none}
-  .jazyk button{font:700 12.5px/1 var(--font);letter-spacing:.08em;color:var(--t);background:none;border:0;padding:10px 12px;cursor:pointer}
+  .jazyk button{font:700 15px/1 var(--font);letter-spacing:.08em;color:var(--t);background:none;border:0;padding:12px 16px;cursor:pointer}
+  .jazyk button:hover{color:var(--o-text)}
+  .jazyk button[aria-pressed="true"]:hover{color:var(--na-o)}
   .jazyk button[aria-pressed="true"]{background:var(--o);color:var(--na-o)}
   .jazyk button:focus-visible{outline:2px solid var(--o);outline-offset:2px}
 </style>
