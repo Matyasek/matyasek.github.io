@@ -172,9 +172,18 @@
     .postup{grid-template-columns:repeat(2,minmax(0,1fr))}
     .pas .postup{grid-template-columns:repeat(2,minmax(0,1fr))}
   }
+  /* ---------- přepínač jazyka ---------- */
+  .jazyk{position:absolute;top:14px;right:clamp(16px,3vw,28px);z-index:10;display:flex;border:2px solid var(--t);background:var(--p)}
+  .jazyk[hidden]{display:none}
+  .jazyk button{font:700 12.5px/1 var(--font);letter-spacing:.08em;color:var(--t);background:none;border:0;padding:10px 12px;cursor:pointer}
+  .jazyk button[aria-pressed="true"]{background:var(--o);color:var(--na-o)}
+  .jazyk button:focus-visible{outline:2px solid var(--o);outline-offset:2px}
 </style>
 </head>
 <body>
+<div class="jazyk" role="group" aria-label="Jazyk / Language" hidden><button type="button" data-lang="cs" lang="cs" aria-pressed="true">CZ</button><button type="button" data-lang="en" lang="en" aria-pressed="false">EN</button></div>
+
+<div id="stranka" lang="cs">
 <header class="hlavicka">
   <div class="vnitr">
     <div class="mrizka">
@@ -473,6 +482,335 @@
     </div>
   </div>
 </footer>
+</div>
+
+<template id="stranka-en">
+<header class="hlavicka">
+  <div class="vnitr">
+    <div class="mrizka">
+      <div>
+        <p class="eyebrow">Portfolio · September 2026 · Prague</p>
+        <h1 class="roztazene">Matyáš<br>Přibyl</h1>
+        <p class="kurz-radek"><a href="#kurzy">Graduate of Superpower Vibe Coding Summer (Aibility)</a></p>
+        <p class="teze">I use Claude Code to build apps and automations for real clients: a print shop, a car detailing business, a jewellery brand and construction companies. Not one-off demos, but things that keep running when I&rsquo;m not watching them. They rest on a system I&rsquo;ve built around Claude Code: one workspace, a fixed process for every project, and safeguards that look after security and quality.</p>
+        <p class="kontakt"><a href="mailto:matyaspribyll@seznam.cz">matyaspribyll@seznam.cz</a></p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="sekce" id="projekty">
+    <div class="vnitr">
+      <h2 class="roztazene">Projects</h2>
+      <p class="uvod">I have more projects; these are the eight most interesting ones. The process behind them is described below in <a href="#metoda">How I work</a>.</p>
+
+      <p class="stitek">Overview</p>
+      <div class="tab-obal">
+        <table>
+          <thead><tr><th>Project</th><th class="skryt">Client</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><a href="#agent">AI agent writing posts for a print shop</a></td><td class="skryt">family print shop, Prague</td><td class="stav bezi"><i class="ctverec"></i>Live in production</td></tr>
+            <tr><td><a href="#tuk">Ťuk: a home log you tap with your phone</a></td><td class="skryt">household</td><td class="stav bezi"><i class="ctverec"></i>In use at home</td></tr>
+            <tr><td><a href="#obsah">Social media for the print shop and detailing</a></td><td class="skryt">print shop, car detailing</td><td class="stav prubezne"><i class="ctverec"></i>Launching</td></tr>
+            <tr><td><a href="#dilna">3D models for jewellery and 3D printing</a></td><td class="skryt">jewellery, promotional items</td><td class="stav prubezne"><i class="ctverec"></i>Client work</td></tr>
+            <tr><td><a href="#atrostars">Website for the atrostars jewellery brand</a></td><td class="skryt">silver jewellery brand</td><td class="stav bezi"><i class="ctverec"></i>Live</td></tr>
+            <tr><td><a href="#harmonogramy">Construction schedules and cost analyses</a></td><td class="skryt">construction companies</td><td class="stav predano"><i class="ctverec"></i>Delivered</td></tr>
+            <tr><td><a href="#hermes">Hermes Agent</a></td><td class="skryt">for me</td><td class="stav bezi"><i class="ctverec"></i>Running via Telegram</td></tr>
+            <tr><td><a href="#svacina">SVAČINA: a game from a single prompt</a></td><td class="skryt">a contest by profiq</td><td class="stav predano"><i class="ctverec"></i>Submitted</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <article class="projekt" id="agent">
+        <header class="p-hlava">
+          <h3 class="roztazene">AI agent writing posts for a print shop</h3>
+          <p class="p-stav bezi"><i class="ctverec"></i>Live in production</p>
+          <p class="pro">a family-run print shop and graphic studio in Prague</p>
+        </header>
+        <div class="p-text">
+          <p class="co">A social media automation that runs non-stop on Railway. Every Sunday morning it finds topics, writes draft posts and saves them to Notion, where a person reads and approves them. Nothing gets published on its own.</p>
+          <ol class="postup">
+            <li><b>Sunday 7:00</b><span>finds topics</span></li>
+            <li><b>8:00</b><span>writes drafts</span></li>
+            <li><b>Two checks</b><span>facts and Czech language</span></li>
+            <li><b>Notion</b><span>a person approves</span></li>
+          </ol>
+          <p class="proc">Every number in a draft must have a source in a <b>bank of verified facts</b> about the company. A draft with an unsourced number gets one rewrite from the agent; if it still fails, it goes to Notion flagged for verification. When a made-up colleague once appeared in a draft, I traced the cause to the sample text the model had copied her from and fixed the rules, not just that one post.</p>
+          <p class="proc">The agent is built for multiple brands. The second one is the detailing business from <a href="#obsah">Social media for the print shop and detailing</a>.</p>
+        </div>
+        <aside class="p-bok">
+          <p class="stack">TypeScript · Node 22 · Hono · Vercel AI SDK (Gemini, Groq) · Notion API · Apify · Railway · 593&nbsp;automated tests</p>
+          <p class="odkazy"><span class="privat">private repository, access on request</span></p>
+        </aside>
+      </article>
+
+      <article class="projekt" id="tuk">
+        <header class="p-hlava">
+          <h3 class="roztazene">Ťuk: a home log you tap with your phone</h3>
+          <p class="p-stav bezi"><i class="ctverec"></i>Live, in use at home</p>
+          <p class="pro">my own app for our household (&ldquo;ťuk&rdquo; is Czech for &ldquo;tap&rdquo;)</p>
+        </header>
+        <div class="p-text">
+          <p class="co">A home log you write to by tapping your phone. There are NFC stickers by the door, the plants and the bin. Tap an iPhone against one and the log records that the door is locked, the plants are watered or the bin is out, without opening the app. If something gets forgotten, a reminder arrives.</p>
+          <ol class="postup">
+            <li><b>Sticker</b><span>by the door, the plants, the bin</span></li>
+            <li><b>iPhone Shortcut</b><span>runs on a tap</span></li>
+            <li><b>Server</b><span>verifies and records</span></li>
+            <li><b>Log</b><span>shared by the household</span></li>
+          </ol>
+          <p class="proc">The idea came from home. We kept going back to the door to check whether it was locked, and nobody knew who had last watered the plants. Now we just open the log.</p>
+          <p class="proc">The log also shows who was home when, and when the flat is empty. That&rsquo;s why I tackled security first: <b>33 documented risks</b>, each with a mitigation, and an automated test that verifies one household can&rsquo;t reach another household&rsquo;s data.</p>
+        </div>
+        <aside class="p-bok">
+          <p class="stack">Supabase · Postgres 17 · Edge Functions in Deno · pg_cron · Web Push · PWA in Vite and TypeScript · Docker on Railway · 91&nbsp;automated tests</p>
+          <p class="odkazy"><a href="https://okno-production-162d.up.railway.app">Open the app</a><span class="privat">requires an account · private repository, access on request</span></p>
+        </aside>
+      </article>
+
+      <article class="projekt" id="obsah">
+        <header class="p-hlava">
+          <h3 class="roztazene">Social media for the print shop and detailing</h3>
+          <p class="p-stav prubezne"><i class="ctverec"></i>Launching now</p>
+          <p class="pro">a print shop and a mobile car detailing business</p>
+        </header>
+        <div class="p-text">
+          <p class="co">Posts and videos for social media. I&rsquo;ve been preparing the groundwork since early August, and the first posts are going out now. I don&rsquo;t make individual posts; I build the system that produces them: templates, verified facts, the brand&rsquo;s voice and a check before anything is published.</p>
+          <p class="proc">It builds on the <a href="#agent">content agent</a>. The agent drafts copy for the print shop. Finished posts with graphics, and videos for both brands, are made here from the brand voice and the verified facts.</p>
+          <p class="proc">The print shop&rsquo;s content plan is based on an <b>analysis of 300 of its posts from 2018 to 2026</b>. Posts built around a photo performed better than pure graphics, so the new plan leans more on photos.</p>
+          <p class="proc">Claude Code edits the videos: batches of vertical videos through my own script, motion graphics in HyperFrames, and timeline edits in DaVinci Resolve, which it controls through MCP. I only approve the result.</p>
+        </div>
+        <aside class="p-bok">
+          <p class="stack">HTML templates · HyperFrames and Remotion · DaVinci Resolve via MCP · Apify and Python for the analysis</p>
+          <p class="odkazy"><span class="privat">samples on request</span></p>
+        </aside>
+      </article>
+
+      <article class="projekt" id="dilna">
+        <header class="p-hlava">
+          <h3 class="roztazene">3D models for jewellery and 3D printing</h3>
+          <p class="p-stav prubezne"><i class="ctverec"></i>Client work</p>
+          <p class="pro">jewellery for casting, promotional items, animations</p>
+        </header>
+        <div class="p-text">
+          <p class="co">Blender controlled from Claude Code through MCP. It&rsquo;s where rings and pendants for casting in silver, promotional items for 3D printing and social media animations are made. Every model ends up as a file for the goldsmith or the printer, plus renders for the client.</p>
+          <p class="proc">Before delivery, every model is <b>measured, not just eyeballed</b>: wall thickness, dimensions and weight, which sets the price of the silver. Mistakes are caught on screen, not in production.</p>
+          <p class="proc">The ring is a parametric script. A different size means changing one number, not an hour of modelling.</p>
+        </div>
+        <aside class="p-bok">
+          <p class="stack">Blender via MCP · parametric Python scripts · STL for casting and 3D printing · renders and a 360° turntable</p>
+          <p class="odkazy"><span class="privat">models and renders on request</span></p>
+        </aside>
+      </article>
+
+      <article class="projekt" id="atrostars">
+        <header class="p-hlava">
+          <h3 class="roztazene">Website for the atrostars jewellery brand</h3>
+          <p class="p-stav bezi"><i class="ctverec"></i>Live · client project</p>
+          <p class="pro">a portfolio site for a brand of handmade silver jewellery</p>
+        </header>
+        <div class="p-text">
+          <p class="co">A portfolio website for a jewellery brand, and one of my first projects. A gallery of pieces, an enquiry form and an editor where the gallery can be updated without any coding.</p>
+          <p class="proc">I built <b>a custom GitHub login for the editor</b> with Claude Code. The editor logs out automatically when idle, the form filters out bots, and the privacy policy was reviewed by a lawyer.</p>
+        </div>
+        <aside class="p-bok">
+          <img src="obrazky/atrostars.jpg" width="1200" height="800" alt="The atrostars.com homepage with a silver ring">
+          <p class="stack">Static HTML, CSS and JavaScript · Decap CMS · Vercel · three.js · security headers</p>
+          <p class="odkazy"><a href="https://atrostars.com">atrostars.com</a></p>
+        </aside>
+      </article>
+
+      <article class="projekt" id="harmonogramy">
+        <header class="p-hlava">
+          <h3 class="roztazene">Construction schedules and cost analyses</h3>
+          <p class="p-stav predano"><i class="ctverec"></i>Delivered · paid client work</p>
+          <p class="pro">construction companies</p>
+        </header>
+        <div class="p-text">
+          <p class="co">The client gets an Excel workbook and a print-ready PDF with dates for every activity. The cost analyses answer what the flats in a given location will sell for, what the construction will cost and what the gross profit will be.</p>
+          <ol class="postup">
+            <li><b>Activities</b><span>and their dependencies</span></li>
+            <li><b>Python</b><span>builds the workbook with formulas</span></li>
+            <li><b>Check</b><span>recalculates the dates</span></li>
+            <li><b>Excel and PDF</b><span>for the client</span></li>
+          </ol>
+          <p class="proc">The workbook isn&rsquo;t made by hand. Claude Code turns the client&rsquo;s brief into activities and their dependencies, and a script builds the workbook with formulas from them. <b>Python independently recalculates the dates from the formulas</b> and compares both versions. One main script runs everything, from the data to the finished PDF.</p>
+          <p class="proc">I wrote the whole process down as a <b>master prompt</b>, a skill for Claude Code. It takes a job from the client&rsquo;s email through source documents and assumptions to the schedule, the cost analysis, a cover note and the package to send. The next building is mostly new data, not new work.</p>
+        </div>
+        <aside class="p-bok">
+          <p class="stack">Python · openpyxl · LibreOffice · formulas checked against an independent calculation · PDF · harmonogram-stavby skill</p>
+          <p class="odkazy"><span class="privat">samples on request, they contain client data</span></p>
+        </aside>
+      </article>
+
+      <article class="projekt" id="hermes">
+        <header class="p-hlava">
+          <h3 class="roztazene">Hermes Agent</h3>
+          <p class="p-stav bezi"><i class="ctverec"></i>Running via Telegram</p>
+          <p class="pro">an assistant for when I&rsquo;m away from my computer</p>
+        </header>
+        <div class="p-text">
+          <p class="co">From my phone I send it a link or a topic over Telegram. For a forwarded social media post, it judges whether it fits my projects and records the verdict and the next step. Longer research and browsing of websites and social media can run overnight when needed.</p>
+          <ol class="postup">
+            <li><b>Link from my phone</b><span>via Telegram</span></li>
+            <li><b>Hermes</b><span>evaluates or researches</span></li>
+            <li><b>Claude Code</b><span>checks the output in the morning</span></li>
+            <li><b>Workspace</b><span>only what passed</span></li>
+          </ol>
+          <p class="proc">Hermes runs on a different language model than Claude. Every morning Claude Code checks its output and lets only what passes into the workspace. <b>The author and the reviewer really are two different models.</b></p>
+          <p class="proc">The agent may only write to a dedicated folder and treats text from the web as data, not as instructions. I have to approve every command it runs on my computer.</p>
+        </div>
+        <aside class="p-bok">
+          <p class="stack">Hermes Agent · Telegram · GPT-5.6 · Claude Code as the reviewer · scheduled tasks</p>
+          <p class="odkazy"><span class="privat">runs on my computer, samples on request</span></p>
+        </aside>
+      </article>
+
+      <article class="projekt" id="svacina">
+        <header class="p-hlava">
+          <h3 class="roztazene">SVAČINA: a game from a single prompt</h3>
+          <p class="p-stav predano"><i class="ctverec"></i>Submitted to the contest</p>
+          <p class="pro">Summer Coding Challenge 2026 by profiq</p>
+        </header>
+        <div class="p-text">
+          <p class="co">The contest didn&rsquo;t take code; it took <b>a brief for an AI agent</b>. From that brief, the agent had to build the game on its own, in a single run, within an hour and without any human intervention. The result is Snake turned inside out: you&rsquo;re the apple, running from the snake across a squared notebook page.</p>
+          <ol class="postup">
+            <li><b>Brief</b><span>up to 10,000 characters</span></li>
+            <li><b>25 test runs</b><span>17 versions of the brief</span></li>
+            <li><b>Freeze</b><span>only after three good runs in a row</span></li>
+            <li><b>Submitted run</b><span>51 minutes, no edits</span></li>
+          </ol>
+          <p class="proc">There was no way to touch the result by hand, so all the work was in how to brief the agent. The submitted run met all 12 criteria, and the agent verified the game itself with automated checks.</p>
+        </div>
+        <aside class="p-bok">
+          <img src="obrazky/svacina.jpg" width="1200" height="800" alt="The SVAČINA title screen on squared paper">
+          <p class="stack">A single HTML file · canvas · Web Audio · zero dependencies · Claude Code in the cloud</p>
+          <p class="odkazy">
+            <a href="https://matyasek.github.io/svacina-finale/">Play the submitted version</a>
+            <a href="https://github.com/Matyasek/svacina-finale/blob/main/prompt.md">Read the brief for the agent</a>
+            <a href="https://www.pracujprosiliconvalley.cz/summer-coding-challenge-2026/">About the contest</a>
+          </p>
+        </aside>
+      </article>
+    </div>
+  </section>
+
+  <section class="pas" id="metoda">
+    <div class="vnitr">
+      <h2 class="roztazene">How I work</h2>
+      <p class="uvod">Claude Code is my main tool. It runs every day on my computer and in the cloud, connected to GitHub, Supabase, Railway, Vercel and Notion. My job is to decide what gets built, specify it well and verify that the result does what it should. To keep that from being a lottery every time, I rely on three things.</p>
+
+      <div class="blok">
+        <h3 class="roztazene">The PACT workspace</h3>
+        <p>A single repository where Claude Code has everything it needs. A new session doesn&rsquo;t start from zero: Claude Code knows who I am, how I write, who I work for and what&rsquo;s currently in progress.</p>
+        <ul class="pact">
+          <li><b>P</b><span><strong>Projects</strong>each has exactly one home in the registry</span></li>
+          <li><b>A</b><span><strong>Agents and skills</strong>repeated work as ready-made instructions</span></li>
+          <li><b>C</b><span><strong>Context</strong>me, my style, goals, clients and their brands</span></li>
+          <li><b>T</b><span><strong>Tools</strong>scripts and connections to services</span></li>
+        </ul>
+        <p>Order is kept by a program, not by memory: a workspace check reports forgotten branches, projects missing from the registry and broken links.</p>
+        <p class="zvyrazneni"><b>Every Sunday a review runs</b> that cleans up duplicates and looks for manual work worth turning into a skill or an automation.</p>
+      </div>
+
+      <div class="blok">
+        <h3 class="roztazene">The process for every new project</h3>
+        <ol class="postup">
+          <li><b>Idea file</b><span>what and why</span></li>
+          <li><b>Specification</b><span>roles and scope</span></li>
+          <li><b>Risks</b><span>threat model</span></li>
+          <li><b>Plan</b><span>step by step</span></li>
+          <li><b>Build</b><span>to the plan</span></li>
+          <li><b>Tests</b><span>automated</span></li>
+        </ol>
+        <p>The order is mandatory, and <b>nothing gets built without documented risks</b>. Documentation lives in the repository right next to the code: specification, risks, architecture, deployment from scratch and a decision log. Any project can be handed over at any time, for example to IT or a security team.</p>
+        <p>I&rsquo;ve also written the process up for beginners so that it works in any AI tool, not just Claude Code.</p>
+      </div>
+
+      <div class="blok">
+        <h3 class="roztazene">Safeguards that run on their own</h3>
+        <p>Some are enforced by hooks, others by rules the agent follows without being reminded.</p>
+        <ul class="pojistky">
+          <li><span><b>I&rsquo;m starting a new project.</b>A hook reminds me of the mandatory process and the documentation checklist before the first line of code is written.</span></li>
+          <li><span><b>I&rsquo;m installing a skill or a plugin.</b>Before it installs, it goes through a security scanner from NVIDIA. If the scanner finds dangerous code, the installation stops.</span></li>
+          <li><span><b>I&rsquo;m pushing changes to GitHub.</b>A pre-push check blocks anything that looks like a key or a password file, and rejects changes whose tests fail.</span></li>
+          <li><span><b>Something is leaving my computer.</b>An output gate: an automated language check, a read-through by eye, fact-checking against the source, and the whole thing again after the last edit. This portfolio went through it too.</span></li>
+          <li><span><b>Someone other than the author reviews it.</b>A draft post is checked by a different step than the one that wrote it. The same goes for the dates in a schedule, a 3D model for the goldsmith or the output from Hermes.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="sekce" id="kurzy">
+    <div class="vnitr">
+      <h2 class="roztazene">Courses</h2>
+
+      <div class="kurz">
+        <div>
+          <h3 class="roztazene">Superpower Vibe Coding Summer</h3>
+          <p class="p-stav predano"><i class="ctverec"></i>Completed · Aibility, certificate 21&nbsp;August&nbsp;2026</p>
+          <p class="proc">A summer programme on using AI to create reports, websites and apps, and on building your own second brain. My process for new projects and part of the safeguards described above come from it.</p>
+          <p class="odkazy"><a href="https://aibility.org/">About Aibility</a></p>
+        </div>
+        <img src="certifikat-vcs-2026.jpg" width="1600" height="899" alt="Certificate of completion of Superpower Vibe Coding Summer for Matyáš Přibyl, issued by Aibility on 21 August 2026">
+      </div>
+
+      <div class="kurz">
+        <div>
+          <h3 class="roztazene">Future AI Leader 2026</h3>
+          <p class="p-stav bezi"><i class="ctverec"></i>Starts 16&nbsp;October · Filip Dřímalka</p>
+          <p class="proc">A programme on a system for working with AI agents and on adopting AI in companies. It runs online on Fridays from 16&nbsp;October to January 2027.</p>
+          <p class="odkazy"><a href="https://drimalka.com/future-ai-leader">About the programme</a></p>
+        </div>
+        <img class="odznak" src="obrazky/future-ai-leader.webp" width="1080" height="1080" alt="Participant badge: I am part of Future AI Leader, Matyáš Přibyl, starting 16 October 2026">
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="pata">
+  <div class="vnitr">
+    <h2 class="roztazene">What&rsquo;s next</h2>
+    <div class="mrizka">
+      <div>
+        <p>In a few months I&rsquo;ve used Claude Code to build things that run for real clients, and I see manual work everywhere that can be simplified: price lists, orders, customer queries. Retail has a lot of it. That&rsquo;s why I keep learning, and in October I&rsquo;m starting the Future AI Leader programme.</p>
+        <p>Most of my repositories are private because they contain client data. <strong>I&rsquo;ll grant access on request right away</strong>, and I&rsquo;m happy to walk you through any project, including the places where something went wrong and how it was fixed.</p>
+      </div>
+      <p class="kontakty">
+        <a href="mailto:matyaspribyll@seznam.cz">matyaspribyll@seznam.cz</a>
+        <span>Prague</span>
+      </p>
+    </div>
+  </div>
+</footer>
+</template>
+
+<script>
+  /* přepínač CZ/EN: anglická verze leží v <template>, ať se ID sekcí neopakují; ?lang=en otevře rovnou angličtinu */
+  (function () {
+    var obsah = document.getElementById("stranka"), en = document.getElementById("stranka-en");
+    var cs = obsah.innerHTML, tlacitka = document.querySelectorAll(".jazyk button");
+    var titulek = { cs: "Portfolio Matyáše Přibyla", en: "Matyáš Přibyl — Portfolio" };
+    function nastav(j, uloz) {
+      obsah.innerHTML = j === "en" ? en.innerHTML : cs;
+      obsah.lang = j; document.documentElement.lang = j; document.title = titulek[j];
+      tlacitka.forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.lang === j ? "true" : "false"); });
+      if (!uloz) return;
+      try { localStorage.setItem("jazyk", j); } catch (e) {}
+      try {
+        var u = new URL(location.href);
+        if (j === "en") u.searchParams.set("lang", "en"); else u.searchParams.delete("lang");
+        history.replaceState(null, "", u);
+      } catch (e) {}
+    }
+    var q = new URLSearchParams(location.search).get("lang"), j = q === "en" || q === "cs" ? q : null;
+    if (!j) { try { j = localStorage.getItem("jazyk"); } catch (e) {} }
+    if (j !== "en" && j !== "cs") j = /^(cs|sk)\b/i.test(navigator.language || "") ? "cs" : "en";
+    document.querySelector(".jazyk").hidden = false;
+    if (j === "en") nastav("en", false);
+    tlacitka.forEach(function (b) { b.addEventListener("click", function () { nastav(b.dataset.lang, true); }); });
+  })();
+</script>
 
 <script>
   /* proklik z LinkedInu: ?p=agent otevře rovnou sekci projektu (LinkedIn z odkazu odřízne #, parametr nechá) */
