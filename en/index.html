@@ -161,6 +161,14 @@
   .pata .kontakty a{color:var(--pata-t)}
   .pata .kontakty span{color:var(--pata-s);font-size:14px}
 
+  /* proklik na životopis: štítek + CZ | EN, jazyk stránky je zvýrazněný */
+  .cv-odkaz{display:inline-flex;align-items:stretch;margin:18px 0 0;border:2px solid var(--o);font-size:14.5px;line-height:1}
+  .cv-odkaz b{padding:11px 14px;font-weight:700}
+  .cv-odkaz a{font-weight:700;letter-spacing:.08em;text-decoration:none;padding:11px 14px;border-left:2px solid var(--o)}
+  .cv-odkaz a:hover{color:var(--o-text)}
+  .cv-odkaz a.hlavni,.cv-odkaz a.hlavni:hover{background:var(--o);color:var(--na-o)}
+  .pata .kontakty .cv-odkaz{margin:4px 0 0;align-self:flex-start;color:var(--pata-t);font-size:14.5px}
+
   /* ---------- úzké obrazovky ---------- */
   @media (max-width:820px){
     .projekt,.kurz,.pata .mrizka{grid-template-columns:minmax(0,1fr)}
@@ -196,6 +204,7 @@
         <p class="kurz-radek"><a href="#kurzy">Graduate of Superpower Vibe Coding Summer (Aibility)</a></p>
         <p class="teze">I use Claude Code to build apps and automations for real clients: a print shop, a car detailing business, a jewellery brand and construction companies. Not one-off demos, but things that keep running when I&rsquo;m not watching them. They rest on a system I&rsquo;ve built around Claude Code: one workspace, a fixed process for every project, and safeguards that look after security and quality.</p>
         <p class="kontakt"><a href="mailto:matyaspribyll@seznam.cz">matyaspribyll@seznam.cz</a></p>
+        <p class="cv-odkaz"><b>CV (PDF)</b><a href="../cv/matyas-pribyl-cv-cz.pdf" lang="cs" aria-label="CZ – CV in Czech (PDF)">CZ</a><a href="../cv/matyas-pribyl-cv-en.pdf" lang="en" aria-label="EN – CV in English (PDF)" class="hlavni">EN</a></p>
       </div>
     </div>
   </div>
@@ -480,6 +489,7 @@
       </div>
       <p class="kontakty">
         <a href="mailto:matyaspribyll@seznam.cz">matyaspribyll@seznam.cz</a>
+        <span class="cv-odkaz"><b>CV (PDF)</b><a href="../cv/matyas-pribyl-cv-cz.pdf" lang="cs" aria-label="CZ – CV in Czech (PDF)">CZ</a><a href="../cv/matyas-pribyl-cv-en.pdf" lang="en" aria-label="EN – CV in English (PDF)" class="hlavni">EN</a></span>
         <span>Prague</span>
       </p>
     </div>
