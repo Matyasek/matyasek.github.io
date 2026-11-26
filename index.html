@@ -110,7 +110,7 @@
   .prehled thead tr{display:flex;gap:6px 14px;padding-bottom:8px;font-size:12.5px;color:var(--s)}
   .prehled th{text-align:left;font-weight:600;padding:0}
   .prehled thead th:last-child{margin-left:auto}
-  .prehled tbody tr{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1px 16px;align-items:baseline;padding:10px 0;border-top:1px solid var(--r)}
+  .prehled tbody tr{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1px 16px;align-items:baseline;padding:7px 0;border-top:1px solid var(--r)}
   .prehled td{display:block;padding:0}
   .prehled td:first-child{grid-column:1;font-weight:600}
   .prehled td:first-child a{text-decoration-thickness:1px;text-decoration-color:var(--r)}
@@ -229,7 +229,7 @@
     </div>
     <section class="prehled" id="projekty">
       <h2 class="roztazene">Projekty</h2>
-      <p class="uvod">Projektů mám víc, tohle je osm nejzajímavějších. Postup, který za nimi stojí, je popsaný níž v&nbsp;části <a href="#metoda">Jak pracuju</a>.</p>
+      <p class="uvod">Projektů mám víc, tohle je devět nejzajímavějších. Postup, který za nimi stojí, je popsaný níž v&nbsp;části <a href="#metoda">Jak pracuju</a>.</p>
       <p class="stitek">Přehled</p>
       <div class="tab-obal">
       <table>
@@ -237,6 +237,7 @@
       <tbody>
         <tr><td><a href="#agent">AI agent na posty pro tiskárnu</a></td><td class="skryt">rodinná tiskárna, Praha</td><td class="stav bezi"><i class="ctverec"></i>Běží naostro</td></tr>
         <tr><td><a href="#tuk">Ťuk: domácí deník přes NFC</a></td><td class="skryt">domácnost</td><td class="stav bezi"><i class="ctverec"></i>Používáme doma</td></tr>
+        <tr><td><a href="#linka">Linka na weby s&nbsp;nezávislým kritikem</a></td><td class="skryt">vlastní projekt</td><td class="stav prubezne"><i class="ctverec"></i>Ve vývoji</td></tr>
         <tr><td><a href="#obsah">Sociální sítě pro tiskárnu a detailing</a></td><td class="skryt">tiskárna, detailing aut</td><td class="stav prubezne"><i class="ctverec"></i>Spouští se</td></tr>
         <tr><td><a href="#dilna">3D modely pro šperky a&nbsp;3D tisk</a></td><td class="skryt">šperky, reklamní předměty</td><td class="stav prubezne"><i class="ctverec"></i>Zakázky</td></tr>
         <tr><td><a href="#atrostars">Web šperkařské značky atrostars</a></td><td class="skryt">značka stříbrných šperků</td><td class="stav bezi"><i class="ctverec"></i>Běží</td></tr>
@@ -294,6 +295,28 @@
     <aside class="p-bok">
       <p class="stack">Supabase · Postgres 17 · Edge Functions v&nbsp;Denu · pg_cron · Web Push · PWA ve Vite a&nbsp;TypeScriptu · Docker na Railway · 91&nbsp;automatických testů</p>
       <p class="odkazy"><a href="https://okno-production-162d.up.railway.app">Otevřít aplikaci</a><span class="privat">vyžaduje účet · repozitář soukromý, přístup na požádání</span></p>
+    </aside>
+  </article>
+  <article class="projekt" id="linka">
+    <header class="p-hlava">
+      <p class="p-stav prubezne"><i class="ctverec"></i>Ve vývoji</p>
+      <h3 class="roztazene">Linka na weby s&nbsp;nezávislým kritikem</h3>
+      <p class="pro">vlastní projekt, návrhy webů pro malé firmy</p>
+    </header>
+    <div class="p-text">
+      <p class="co">Tým AI agentů, který z&nbsp;podkladů firmy postaví návrh celého webu. Jeden agent navrhne tři směry, já vyberu jeden, druhý agent podle něj postaví celý web a&nbsp;třetí, který práci neviděl vznikat, ho zkontroluje. Co jde změřit, třeba text přetékající mimo obrazovku, hlídá skript. O&nbsp;vzhledu rozhoduju já.</p>
+      <ol class="postup">
+        <li><b>Tři směry</b><span>podle webů, které jsem sám vybral</span></li>
+        <li><b>Můj výběr</b><span>jeden směr ze tří</span></li>
+        <li><b>Stavba</b><span>celý web a&nbsp;automatická kontrola</span></li>
+        <li><b>Kritik</b><span>jiný agent než autor</span></li>
+      </ol>
+      <p class="proc">Nejvíc práce dalo zjistit, <b>komu věřit ve věci vkusu</b>. Ohodnotil jsem 227 cizích webů a&nbsp;nechal agenty stavět weby dvěma způsoby. Podle slovního popisu rozvržení jsem neschválil žádný z&nbsp;18 webů, podle skutečných vzorů všechny čtyři. Ve slepém pokusu se navíc agent, který směry navrhuje, trefil do mého výběru jen ve 2 případech ze 6. Stejně by dopadl, kdyby ze tří směrů vybíral náhodně. Hodnocení od AI proto beru jako předvýběr a&nbsp;poslední slovo mám já.</p>
+      <p class="proc">Každou vadu, kterou na hotovém webu najdu, zapíšu do sbírky ve třech podobách: rozbitá, opravená a&nbsp;podobná, která je v&nbsp;pořádku. Nová kontrola se začne používat, až když rozbitou podobu zachytí a&nbsp;zbylé dvě nechá projít. Sbírka má 23 vad. U&nbsp;každého webu měřím i&nbsp;čas a&nbsp;spotřebu: hotový web stojí zhruba jednu až tři hodiny práce agentů a&nbsp;1,6 až 3,1 milionu tokenů.</p>
+    </div>
+    <aside class="p-bok">
+      <p class="stack">Claude Code · subagenti a&nbsp;workflow · Node.js · headless Chrome · Python · sbírka 23&nbsp;vad s&nbsp;testy</p>
+      <p class="odkazy"><span class="privat">návrhy nejsou veřejné, postup ukážu na požádání</span></p>
     </aside>
   </article>
   <article class="projekt" id="obsah">
